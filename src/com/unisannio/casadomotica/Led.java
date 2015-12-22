@@ -8,5 +8,23 @@ public class Led {
 				
 			this.stanza = stanza;
 		}
+
+		public int getStato() {
+			return stato;
+		}
+
+		public void setStato(int stato) {
+			this.stato = stato;
+		}
+
+		public int getStanza() {
+			return stanza;
+		}
+
+		public void setStanza(int stanza) {
+			this.stanza = stanza;
+		}
+		
+		
 		
 }
