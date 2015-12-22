@@ -25,6 +25,10 @@ public class Led {
 			this.stanza = stanza;
 		}
 		
-		
+		public void accendiLed (int stato){  //metodo accediLed
+			
+			
+			
+		}
 		
 }
