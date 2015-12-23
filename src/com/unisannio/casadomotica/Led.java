@@ -18,7 +18,7 @@ public class Led {
 		}
 
 		public int getStanza() {
-			return stanza;
+			   return stanza;
 		}
 
 		public void setStanza(int stanza) {
