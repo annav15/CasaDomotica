@@ -48,6 +48,26 @@ while (client.connected()) {
     //if HTTP request has ended  
     if (c == '\n' && currentLineIsBlank) {  
       Serial.print(readString); 
+      
+      //ACCENZIONE LED
+      if(readString.indexOf("leds1ON")>0) {
+        LEDON1 = true:
+        
+      }
+      else if(readString.indexOf("leds1OFF")>0){
+        LEDON1=false;
+        }
+
+        if(LEDON1==true){
+          digitalWrite(luce1,HIGH);
+          }
+          if(LEDON1==false){
+            digitalWrite(luce1,LOW)
+            }
+        
+        }
+      }
+      }
   
     }
 }
