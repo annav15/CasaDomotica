@@ -60,6 +60,7 @@ void loop() {
           }
           if (LEDON1 == false) {
             digitalWrite(luce1, LOW);
+          }
             client.println("HTTP/1.1 200 OK.....");
             client.println("Content-Type: text/html");
             client.println();
@@ -80,8 +81,6 @@ void loop() {
             readString = "";
             client.stop();
           
-          }
-
         } // Fine lettura Stream
       } //Fine attivazione
     } //Fine connessione
