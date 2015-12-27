@@ -19,6 +19,9 @@ byte subnet[] = { 255, 255, 255, 0 }; //subnet mask
 EthernetServer server(80); // porta di comunicazione del server 
 
 int luce1 = 2   //pin di connessione led di arduino 
+
+String readString;
+
 boolean LEDON1=false; // dichiarazione di una variabile boolean per verificare l'accenzione o meno del led
 
 
