@@ -1,23 +1,50 @@
-/*
-  AnalogReadSerial
-  Reads an analog input on pin 0, prints the result to the serial monitor.
-  Graphical representation is available using serial plotter (Tools > Serial Plotter menu)
-  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+//////////////////////      LIBRERIE      ////////////////////////
 
-  This example code is in the public domain.
-*/
+#include <Dhcp.h>
+#include <Dns.h>
+#include <Ethernet.h>
+#include <EthernetClient.h>
+#include <EthernetServer.h>
+#include <EthernetUdp.h>
 
-// the setup routine runs once when you press reset:
+#include <SPI.h>
+
+#include <String.h>
+
+
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // mac address dell'arduino
+byte ip[] = { 192,168,1,58};// indirizzo ip fisico di arduino 
+byte gateway[] = { 192,168,1,1 }; // accesso ad internet via router 
+byte subnet[] = { 255, 255, 255, 0 }; //subnet mask
+EthernetServer server(80); // porta di comunicazione del server 
+
+int luce1 = 2   //pin di connessione led di arduino 
+boolean LEDON1=false; // dichiarazione di una variabile boolean per verificare l'accenzione o meno del led
+
+
+
+
 void setup() {
-  // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600);
+  
+  Ethernet.begin(mac,ip,gateway,subnet);  // inizializzazione dela comunicazione Ethernet   
+  pinMode(luce1, OUTPUT);   // dichiarazione del pin 2 come uscita 
+
+  Serial.begin(9600);  // inizializzazione della porta seriale di comunicazione 
+
 }
 
-// the loop routine runs over and over again forever:
 void loop() {
-  // read the input on analog pin 0:
-  int sensorValue = analogRead(A0);
-  // print out the value you read:
-  Serial.println(sensorValue);
-  delay(1);        // delay in between reads for stability
+
+
+  EthernetClient client = server.available();
+if (client) {  boolean currentLineIsBlank = true; 
+while (client.connected()) {
+  if (client.available()) {
+    char c = client.read(); 
+    readString.concat(c); //memorizzo ogni carattere della stringa   
+    //if HTTP request has ended  
+    if (c == '\n' && currentLineIsBlank) {  
+      Serial.print(readString); 
+  
+    }
 }
