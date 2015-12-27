@@ -60,12 +60,31 @@ void loop() {
           }
           if (LEDON1 == false) {
             digitalWrite(luce1, LOW);
+            client.println("HTTP/1.1 200 OK.....");
+            client.println("Content-Type: text/html");
+            client.println();
+            // inizializzo pagina (da togliere se uso ajax)
+            client.print("<html><head><title>ARDUINO Controllo Led via WEB</title></head><body>");
+            //iniza il body
+            client.println("<div style='width:1280px; height:720px;'>");
+            client.println("<h1>STATO SENSORE</h1><hr />");
+
+
+            client.println("<p>Stato LED 1 = ");
+            client.println("<input type=text id=stato1 value=");
+            client.println(LEDON1);
+            client.println(">");
+            client.println("  <br /></p>");
+
+            client.println("</body></html>");
+            readString = "";
+            client.stop();
           
-        }
+          }
 
-      }
-    }
-  }
+        } // Fine lettura Stream
+      } //Fine attivazione
+    } //Fine connessione
 
-}
-}
+  } // Fine client
+} //  Fine loop
