@@ -13,9 +13,15 @@ EthernetServer server(80); // porta di comunicazione del server
 
 int luce1 = 2 ;   //pin di connessione led di arduino
 
+int luce2 = 3; 
+
 String readString ;
 
 boolean LEDON1 = false ; // dichiarazione di una variabile boolean per verificare l'accenzione o meno del led
+
+boolean LEDON2 = false ; 
+
+
 
 
 
@@ -25,6 +31,8 @@ void setup() {
 
   Ethernet.begin(mac, ip, gateway, subnet); // inizializzazione dela comunicazione Ethernet
   pinMode(luce1, OUTPUT);   // dichiarazione del pin 2 come uscita
+  
+  pinMode(luce2, OUTPUT);
 
   Serial.begin(9600);  // inizializzazione della porta seriale di comunicazione
 
@@ -61,6 +69,23 @@ void loop() {
           if (LEDON1 == false) {
             digitalWrite(luce1, LOW);
           }
+
+
+          if (readString.indexOf("leds2ON") > 0 ) {
+            LEDON2 = true;
+
+          }
+          else if (readString.indexOf("leds2OFF") > 0) {
+            LEDON2 = false;
+          }
+
+          if (LEDON2 == true) {
+            digitalWrite(luce2, HIGH);
+          }
+          if (LEDON2 == false) {
+            digitalWrite(luce2, LOW);
+          }
+          
             client.println("HTTP/1.1 200 OK.....");
             client.println("Content-Type: text/html");
             client.println();
@@ -74,6 +99,13 @@ void loop() {
             client.println("<p>Stato LED 1 = ");
             client.println("<input type=text id=stato1 value=");
             client.println(LEDON1);
+            client.println(">");
+            client.println("  <br /></p>");
+
+
+            client.println("<p>Stato LED 2 = ");
+            client.println("<input type=text id=stato1 value=");
+            client.println(LEDON2);
             client.println(">");
             client.println("  <br /></p>");
 
