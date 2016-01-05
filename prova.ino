@@ -131,7 +131,11 @@ void loop() {
           client.println(LEDON2);
           client.println(">");
           client.println("  <br /></p>");
-
+          client.println("<p>Temperatura Interna = ");
+          client.println("<input type=text id=temperaturaint value=");
+          client.println(valtemperaturaint);
+          client.println(">");
+          client.println("  <br /></p>");
           client.println("</body></html>");
           readString = "";
           client.stop();
