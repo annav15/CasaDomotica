@@ -14,8 +14,7 @@ public class Led {
 				if (stato==1){
 					
 					commandArduino("http://arduino201.homepc.it/?leds1ON");
-					
-					
+							
 				}
 				else{
 					commandArduino("http://arduino201.homepc.it/?leds1OFF");

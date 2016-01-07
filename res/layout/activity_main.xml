@@ -28,4 +28,31 @@
         android:layout_marginLeft="21dp"
         android:text="accendi s1" />
 
+   <LinearLayout
+       android:id="@+id/box_tempINT"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/spegni"
+       android:layout_below="@+id/spegni"
+       android:layout_marginTop="39dp"
+       android:gravity="center_horizontal"
+       android:orientation="vertical"
+       android:padding="10dp" >
+
+       <TextView
+           android:id="@+id/tempINT1_value"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_horizontal"
+           android:textSize="40sp" />
+
+       <TextView
+           android:id="@+id/temperaturaInt"
+           android:layout_width="101dp"
+           android:layout_height="match_parent"
+           android:gravity="center_horizontal"
+           android:paddingBottom="10dp"
+           android:text="temperatura interna" />
+   </LinearLayout>
+
 </RelativeLayout>

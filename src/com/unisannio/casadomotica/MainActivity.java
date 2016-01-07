@@ -3,6 +3,9 @@ package com.unisannio.casadomotica;
 import android.support.v7.app.ActionBarActivity;
 
 import android.view.View.OnClickListener;
+
+
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -12,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -26,10 +30,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button accendiS1 = (Button) findViewById(R.id.accendi);
-		Button spegnis1 = (Button) findViewById(R.id.spegni);
+		 Button spegnis1 = (Button) findViewById(R.id.spegni);
 		
 		accendiS1.setOnClickListener(this);
 		spegnis1.setOnClickListener(this);
+		TextView valTemp1=(TextView)findViewById(R.id.tempINT1_value);
+		Preleva pr=new Preleva();
+		 String tempinterna=pr.getTempInterna();
+		  valTemp1.setText(tempinterna);
 	}
 	@Override
 	public void onClick(View v) {
