@@ -26,18 +26,32 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		StrictMode.ThreadPolicy policy = new StrictMode.
 				ThreadPolicy.Builder().permitAll().build();
-				StrictMode.setThreadPolicy(policy);
+			     	StrictMode.setThreadPolicy(policy);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button accendiS1 = (Button) findViewById(R.id.accendi);
 		 Button spegnis1 = (Button) findViewById(R.id.spegni);
-		
+		 Button accendis2 = (Button) findViewById(R.id.accendis2);
+		 Button spegnis2 = (Button) findViewById(R.id.spegnis2);
+		 Button accendis3 = (Button) findViewById(R.id.accendis3);
+		 Button spegnis3 = (Button) findViewById(R.id.spegnis3);
+		 Button accendiEST = (Button) findViewById(R.id.accendiEST);
+		 Button spegniEST = (Button) findViewById(R.id.spegniEST);
 		accendiS1.setOnClickListener(this);
 		spegnis1.setOnClickListener(this);
+		accendis2.setOnClickListener(this);
+		spegnis2.setOnClickListener(this);
+		accendis3.setOnClickListener(this);
+		spegnis3.setOnClickListener(this);
+		accendiEST.setOnClickListener(this);
+		spegniEST.setOnClickListener(this);
 		TextView valTemp1=(TextView)findViewById(R.id.tempINT1_value);
 		Preleva pr=new Preleva();
 		 String tempinterna=pr.getTempInterna();
 		  valTemp1.setText(tempinterna);
+		  TextView valTempEST=(TextView)findViewById(R.id.tempEST_value);
+		 String tempEST=pr.getTempEsterna();
+			    valTempEST.setText(tempEST);
 	}
 	@Override
 	public void onClick(View v) {
@@ -45,11 +59,35 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		switch(v.getId()){
 	case R.id.accendi:		
 		Led.accendiLed(1,1);
-		Toast.makeText(getApplicationContext(), "led cucina acceso",Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "led s1 acceso",Toast.LENGTH_LONG).show();
 		break;
 	case R.id.spegni:		
 		Led.accendiLed(1,0);
-		Toast.makeText(getApplicationContext(), "led cucina spento",Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "led s1 spento",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.accendis2:		
+		Led.accendiLed(2,1);
+		Toast.makeText(getApplicationContext(), "led s2 acceso",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.spegnis2:		
+		Led.accendiLed(2,0);
+		Toast.makeText(getApplicationContext(), "led s2 spento",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.accendis3:		
+		Led.accendiLed(3,1);
+		Toast.makeText(getApplicationContext(), "led s3 acceso",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.spegnis3:		
+		Led.accendiLed(3,0);
+		Toast.makeText(getApplicationContext(), "led s3 spento",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.accendiEST:		
+		Led.accendiLed(4,1);
+		Toast.makeText(getApplicationContext(), "led esterno acceso",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.spegniEST:		
+		Led.accendiLed(4,0);
+		Toast.makeText(getApplicationContext(), "led esterno spento",Toast.LENGTH_LONG).show();
 		break;
 	}
 	}

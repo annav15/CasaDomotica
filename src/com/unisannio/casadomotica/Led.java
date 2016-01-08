@@ -12,12 +12,51 @@ public class Led {
 			
 			if(stanza==1){
 				if (stato==1){
-					
-					commandArduino("http://arduino201.homepc.it/?leds1ON");
+			 		
+				 	commandArduino("http://arduino201.homepc.it/?leds1ON");
 							
 				}
 				else{
 					commandArduino("http://arduino201.homepc.it/?leds1OFF");
+				
+					
+				}
+			
+		}
+			if(stanza==2){
+				if (stato==1){
+					
+					commandArduino("http://arduino201.homepc.it/?leds2ON");
+							
+				}
+				else{
+					commandArduino("http://arduino201.homepc.it/?leds2OFF");
+				
+					
+				}
+			
+		}
+			if(stanza==3){
+				if (stato==1){
+					
+					commandArduino("http://arduino201.homepc.it/?leds3ON");
+							
+				}
+				else{
+					commandArduino("http://arduino201.homepc.it/?leds3OFF");
+				
+					
+				}
+			
+		}
+			if(stanza==4){
+				if (stato==1){
+					
+					commandArduino("http://arduino201.homepc.it/?ledestON");
+							
+				}
+				else{
+					commandArduino("http://arduino201.homepc.it/?ledestOFF");
 				
 					
 				}

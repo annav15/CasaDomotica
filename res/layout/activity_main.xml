@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.unisannio.casadomotica.MainActivity" >
 
-    <Button
+     <Button
         android:id="@+id/spegni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,31 +28,140 @@
         android:layout_marginLeft="21dp"
         android:text="accendi s1" />
 
-   <LinearLayout
-       android:id="@+id/box_tempINT"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignLeft="@+id/spegni"
-       android:layout_below="@+id/spegni"
-       android:layout_marginTop="39dp"
-       android:gravity="center_horizontal"
-       android:orientation="vertical"
-       android:padding="10dp" >
+    <LinearLayout
+        android:id="@+id/box_tempINT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spegni"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="29dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-       <TextView
-           android:id="@+id/tempINT1_value"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:gravity="center_horizontal"
-           android:textSize="40sp" />
+        <TextView
+            android:id="@+id/tempINT1_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="40sp" />
 
-       <TextView
-           android:id="@+id/temperaturaInt"
-           android:layout_width="101dp"
-           android:layout_height="match_parent"
-           android:gravity="center_horizontal"
-           android:paddingBottom="10dp"
-           android:text="temperatura interna" />
-   </LinearLayout>
+        <TextView
+            android:id="@+id/temperaturaInt"
+            android:layout_width="101dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="temperatura interna" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/accendi"
+        android:layout_alignTop="@+id/box_tempINT"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tempEST_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="101dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="temperatura esterna" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spegni"
+        android:layout_marginTop="90dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/accendis3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="21dp"
+            android:text="accendi s3" />
+
+        <Button
+            android:id="@+id/spegnis3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="31dp"
+            android:text="spegni s3" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spegni"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/accendis2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="21dp"
+            android:text="accendi s2" />
+
+        <Button
+            android:id="@+id/spegnis2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="31dp"
+            android:text="spegni s2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_marginTop="18dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/accendiEST"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="21dp"
+            android:text="accendi EST" />
+
+        <Button
+            android:id="@+id/spegniEST"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="31dp"
+            android:text="spegni EST" />
+    </RelativeLayout>
 
 </RelativeLayout>
