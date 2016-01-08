@@ -187,7 +187,7 @@ void loop() {
           client.println("HTTP/1.1 200 OK.....");
           client.println("Content-Type: text/html");
           client.println();
-          // inizializzo pagina (da togliere se uso ajax)
+         
           client.print("<html><head><title>ARDUINO Controllo Led e Temperatura via WEB</title></head><body>");
           //iniza il body
           client.println("<div style='width:1280px; height:720px;'>");
