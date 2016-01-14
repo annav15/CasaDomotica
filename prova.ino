@@ -106,8 +106,8 @@ void loop() {
   if (valtemperaturaint >= 27)
 
     digitalWrite(condizionatore, HIGH);
-    else
-      digitalWrite(condizionatore, LOW);
+  else
+    digitalWrite(condizionatore, LOW);
 
   /// CONTROLLO TEMPERATURA INTERNA PER ACCENSIONE CALDAIA
 
@@ -145,6 +145,35 @@ void loop() {
         //if HTTP request has ended
         if (c == '\n' && currentLineIsBlank) {
           Serial.print(readString);
+
+
+          //// COMANDI ACCENDI E SPEGNI TUTTO INTERNO
+
+          if (readString.indexOf("accendituttointerno") > 0 ) {
+
+            LEDON1 = true;
+            LEDON2 = true;
+            LEDON3 = true;
+
+            digitalWrite(luce1, HIGH);
+            digitalWrite(luce2, HIGH);
+            digitalWrite(luce3, HIGH);
+          }
+
+          if (readString.indexOf("spegnituttointerno") > 0 ) {
+            LEDON1 = false;
+            LEDON2 = false;
+            LEDON3 = false;
+
+            digitalWrite(luce1, LOW);
+            digitalWrite(luce2, LOW);
+            digitalWrite(luce3, LOW);
+
+
+
+          }
+
+
 
           //ACCENZIONE LED1
 
