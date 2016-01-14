@@ -1,13 +1,25 @@
 package com.unisannio.casadomotica;
 
 import android.support.v7.app.ActionBarActivity;
-
+import android.util.Log;
 import android.view.View.OnClickListener;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,73 +42,102 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			     	StrictMode.setThreadPolicy(policy);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Button accendiS1 = (Button) findViewById(R.id.accendi);
-		 Button spegnis1 = (Button) findViewById(R.id.spegni);
-		 Button accendis2 = (Button) findViewById(R.id.accendis2);
-		 Button spegnis2 = (Button) findViewById(R.id.spegnis2);
-		 Button accendis3 = (Button) findViewById(R.id.accendis3);
-		 Button spegnis3 = (Button) findViewById(R.id.spegnis3);
-		 Button accendiEST = (Button) findViewById(R.id.accendiEST);
-		 Button spegniEST = (Button) findViewById(R.id.spegniEST);
-		accendiS1.setOnClickListener(this);
-		spegnis1.setOnClickListener(this);
-		accendis2.setOnClickListener(this);
-		spegnis2.setOnClickListener(this);
-		accendis3.setOnClickListener(this);
-		spegnis3.setOnClickListener(this);
-		accendiEST.setOnClickListener(this);
-		spegniEST.setOnClickListener(this);
-		TextView valTemp1=(TextView)findViewById(R.id.tempINT1_value);
-		Preleva pr=new Preleva();
-		 String tempinterna=pr.getTempInterna();
-		  valTemp1.setText(tempinterna);
-		  TextView valTempEST=(TextView)findViewById(R.id.tempEST_value);
-		 String tempEST=pr.getTempEsterna();
-			    valTempEST.setText(tempEST);
+		
+	
+	Button buttonInviaDati = (Button) findViewById(R.id.button1);
+	buttonInviaDati.setOnClickListener(this);
 	}
+public void decidi(String a)
+{
+
+	if(a.compareTo("trovato")>0){
+		Intent openPage1 = new Intent(MainActivity.this,Gestione.class);  
+//		// passo all'attivazione dell'activity page1.java  
+		startActivity(openPage1);
+		Toast toast = Toast.makeText(getApplicationContext(),"Benvenuto",3);
+		toast.show();
+			
+	}else 
+	{
+		
+		Toast toast = Toast.makeText(getApplicationContext(),"ATTENZIONE login errato",3);
+		toast.show();
+		
+	}
+		
+}
+@Override
+public void onClick(View v) {
+	// TODO Auto-generated method stub
+	switch(v.getId()){
+	case R.id.button1:
+	//new Invia().execute();	
+	Invia vb=new Invia();
+	String a=vb.doInBackground();
+	this.decidi(a);		
+	break;
+	}
+}
+private class Invia extends AsyncTask<String, String,String> {
+	String result=null; 
+	InputStream is; 
+	StringBuilder sb;
+
 	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch(v.getId()){
-	case R.id.accendi:		
-		Led.accendiLed(1,1);
-		Toast.makeText(getApplicationContext(), "led s1 acceso",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.spegni:		
-		Led.accendiLed(1,0);
-		Toast.makeText(getApplicationContext(), "led s1 spento",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.accendis2:		
-		Led.accendiLed(2,1);
-		Toast.makeText(getApplicationContext(), "led s2 acceso",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.spegnis2:		
-		Led.accendiLed(2,0);
-		Toast.makeText(getApplicationContext(), "led s2 spento",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.accendis3:		
-		Led.accendiLed(3,1);
-		Toast.makeText(getApplicationContext(), "led s3 acceso",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.spegnis3:		
-		Led.accendiLed(3,0);
-		Toast.makeText(getApplicationContext(), "led s3 spento",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.accendiEST:		
-		Led.accendiLed(4,1);
-		Toast.makeText(getApplicationContext(), "led esterno acceso",Toast.LENGTH_LONG).show();
-		break;
-	case R.id.spegniEST:		
-		Led.accendiLed(4,0);
-		Toast.makeText(getApplicationContext(), "led esterno spento",Toast.LENGTH_LONG).show();
-		break;
-	}
-	}
+		protected String doInBackground(String... params) {
+			final EditText username = (EditText) findViewById(R.id.editText1);
+			final EditText password = (EditText) findViewById(R.id.editText2);
+			HttpClient httpclient = new DefaultHttpClient();
+	   		//String a = url+"?username="+user.getText().toString()+"&pass="+pass.getText().toString();
+		HttpResponse resp;
+		try {
+			resp = httpclient.execute(new HttpGet("http://provadip.altervista.org/loginDaAndroid.php"+"?username="+username.getText().toString()+"&password="+password.getText().toString()));
+			HttpEntity entity = resp.getEntity();
+	    	is = entity.getContent();
+	    	
+	    	
+	    	if (is!=null)
+	    	{
+	    		try{
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+	                StringBuilder sb = new StringBuilder();
+	                String line = null;
+	                while((line = reader.readLine()) != null) {
+	                        sb.append(line + "\n");
+	                }
+	                is.close();
+	                result=sb.toString();
+	               
+	        }catch(Exception e){
+	                Log.e("TEST", "Errore nel convertire il risultato "+e.toString());
+	        }
+	    	
+	    	
+	         
+	            
+	    	}
+	    	
+	    	
+		}
+		catch(Exception e){
+	        Log.e("TEST","errore nella p... "+e.toString());
+		}
+		return result;
+		}
+
+	
+	    	
+}
+
+	
+	
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		                        return true;
+		return true;
 	}
 
 	@Override
