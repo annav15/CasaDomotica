@@ -13,8 +13,8 @@ public class Preleva{
 	public Preleva(){
 
 		try {
-			//doc = Jsoup.connect("http://arduino201.homepc.it/").get();
-			doc = Jsoup.connect("http://provadip.altervista.org/statica.html/").get();
+			doc = Jsoup.connect("http://arduino201.homepc.it/").get();
+			//doc = Jsoup.connect("http://provadip.altervista.org/statica.html/").get();
 			Element ele =doc.getElementById("temperaturaint");
 		     	Element stato1 =doc.getElementById("stato1");
 			 Element est =doc.getElementById("temperaturaest");
