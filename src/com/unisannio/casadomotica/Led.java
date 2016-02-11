@@ -62,6 +62,19 @@ public class Led {
 				}
 			
 		}
+			if(stanza==5){
+				if (stato==1){
+					
+					commandArduino("http://arduino201.homepc.it/?automatico");
+							
+				}
+				else{
+					commandArduino("http://arduino201.homepc.it/?ledestOFF");
+				
+					
+				}
+			
+		}
 		
 }
 		public static void commandArduino(String url){

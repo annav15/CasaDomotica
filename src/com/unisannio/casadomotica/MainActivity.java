@@ -51,7 +51,7 @@ public void decidi(String a)
 {
 
 	if(a.compareTo("trovato")>0){
-		Intent openPage1 = new Intent(MainActivity.this,Gestione.class);  
+		Intent openPage1 = new Intent(MainActivity.this,Scelta.class);  
 //		// passo all'attivazione dell'activity page1.java  
 		startActivity(openPage1);
 		Toast toast = Toast.makeText(getApplicationContext(),"Benvenuto",3);
