@@ -6,8 +6,11 @@
 #include <OneWire.h>    // librerie per il funzionamento dei sensori di temperatura 
 #include <DallasTemperature.h>
 
-#define temperaturaint A2  // dichiarazione dell'ingresso analogico A2 di arduino 
+#define temperaturaint A2  // dichiarazione dell'ingresso analogico di arduino per i sensori di temperatura
 #define temperaturaest A3
+
+#define fotoint A0   // ingressi analogici arduino per la fotoresistenza
+#define fotoest A1
 
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // mac address dell'arduino
@@ -24,6 +27,10 @@ int luce3 = 4;
 
 int luceest = 5;
 
+int caldaia = 6; // uscita led per il riscaldamento
+
+int condizionatore = 7; // uscita led per il raffreddamento
+
 String readString ;
 
 boolean LEDON1 = false ; // dichiarazione di una variabile boolean per verificare l'accenzione o meno del led
@@ -34,8 +41,17 @@ boolean LEDON3 = false;
 
 boolean LEDEST = false;
 
+boolean CALDAIA = false;
+
+boolean CONDIZIONATORE = false;
+
+
 float temp1;      // variabile temperatura da rilevare
 float temp2;
+
+float tempregint = 25.0;
+float tempregest = 25.0;
+
 
 /// TEMPERATURA INTERNA///
 
@@ -47,7 +63,7 @@ DallasTemperature sensoreint(&ourWireint);
 OneWire ourWireest(temperaturaest);
 DallasTemperature sensoreest(&ourWireint);
 
-double valtemperaturaint;
+double valtemperaturaint; // variabile di lettura del valore di temperatira dei sensori
 double valtemperaturaest;
 
 
@@ -66,12 +82,73 @@ void setup() {
 
   pinMode(luceest, OUTPUT);
 
+  pinMode(caldaia, OUTPUT);
+
+  pinMode(condizionatore, OUTPUT);
+
   Serial.begin(9600);  // inizializzazione della porta seriale di comunicazione
+
   sensoreint.begin();
   sensoreest.begin();
 }
 
 void loop() {
+
+  /// LETTURA VALORI DI LUMINOSITA ///
+
+  int luminositaint = analogRead(fotoint);
+  int luminositaest = analogRead(fotoest);
+
+
+
+  /// CONTROLLO AUTOMATICO LUMINOSITA INTERNA ///
+
+  if ((luminositaint < 250) && (readString.indexOf("automatico") > 0))
+
+  {
+
+    digitalWrite(luce1, HIGH);
+    digitalWrite(luce2, HIGH);
+    digitalWrite(luce3, HIGH);
+    delay (1000);
+
+
+  }
+
+  else {
+
+    digitalWrite(luce1, LOW);
+    digitalWrite(luce2, LOW);
+    digitalWrite(luce3, LOW);
+    delay (1000);
+
+
+  }
+
+
+
+  /// CONTROLLO AUTOMATICO LUMINOSITA ESTERNA ///
+
+  if ((luminositaest < 650) && (readString.indexOf("automatico") > 0))
+
+  {
+
+    digitalWrite(luceest, HIGH);
+
+    delay (1000);
+
+
+  }
+
+  else {
+
+    digitalWrite(luceest, LOW);
+
+    delay (1000);
+
+
+  }
+
 
 
   /// CALCOLO VALORE DELLA TEMPERATURA INTERNA ///
@@ -85,6 +162,23 @@ void loop() {
   Serial.println(valtemperaturaint);
 
   Serial.println("*C ");
+
+  /// CONTROLLO TEMPERATURA INTERNA PER ACCENSIONE CONDIZIONAMENTO
+
+  if (valtemperaturaint >= 27)
+
+    digitalWrite(condizionatore, HIGH);
+  else
+    digitalWrite(condizionatore, LOW);
+
+  /// CONTROLLO TEMPERATURA INTERNA PER ACCENSIONE CALDAIA
+
+  if (valtemperaturaint <= 18)
+    digitalWrite(caldaia, HIGH);
+  else
+    digitalWrite(caldaia, LOW);
+
+
 
 
   // CALCOLO VALORE DELLA TEMPERATURA ESTERNA ///
@@ -101,6 +195,21 @@ void loop() {
 
 
 
+  /// CONTROLLO AUTOMATICO CONDIZIONAMENTO ///
+
+  if ((valtemperaturaint < tempregint - 5) && (readString.indexOf("automatico") > 0))
+  {
+
+    digitalWrite(caldaia, HIGH);
+    digitalWrite(condizionatore, LOW);
+  }
+  if ((valtemperaturaint > tempregint + 5) && (readString.indexOf("automatico") > 0))
+  {
+    digitalWrite(condizionatore, HIGH);
+    digitalWrite(caldaia, HIGH);
+
+  }
+
   /////       INIZIO CLIENT     /////
 
   EthernetClient client = server.available();
@@ -113,6 +222,35 @@ void loop() {
         //if HTTP request has ended
         if (c == '\n' && currentLineIsBlank) {
           Serial.print(readString);
+
+
+          //// COMANDI ACCENDI E SPEGNI TUTTO INTERNO
+
+          if (readString.indexOf("accendituttointerno") > 0 ) {
+
+            LEDON1 = true;
+            LEDON2 = true;
+            LEDON3 = true;
+
+            digitalWrite(luce1, HIGH);
+            digitalWrite(luce2, HIGH);
+            digitalWrite(luce3, HIGH);
+          }
+
+          if (readString.indexOf("spegnituttointerno") > 0 ) {
+            LEDON1 = false;
+            LEDON2 = false;
+            LEDON3 = false;
+
+            digitalWrite(luce1, LOW);
+            digitalWrite(luce2, LOW);
+            digitalWrite(luce3, LOW);
+
+
+
+          }
+
+
 
           //ACCENZIONE LED1
 
@@ -175,19 +313,19 @@ void loop() {
             LEDEST = false;
           }
 
-          if (LEDEST== true) {
+          if (LEDEST == true) {
             digitalWrite(luceest, HIGH);
           }
           if (LEDEST == false) {
             digitalWrite(luceest, LOW);
           }
 
-          
+          /// PAGINA WEB
 
           client.println("HTTP/1.1 200 OK.....");
           client.println("Content-Type: text/html");
           client.println();
-         
+          // inizializzo pagina (da togliere se uso ajax)
           client.print("<html><head><title>ARDUINO Controllo Led e Temperatura via WEB</title></head><body>");
           //iniza il body
           client.println("<div style='width:1280px; height:720px;'>");
@@ -221,7 +359,7 @@ void loop() {
           client.println(">");
           client.println("  <br /></p>");
 
-          
+
           client.println("<p>Temperatura Interna = ");
           client.println("<input type=text id=temperaturaint value=");
           client.println(valtemperaturaint);
@@ -235,7 +373,7 @@ void loop() {
           client.println(">");
           client.println("  <br /></p>");
 
-          
+
           client.println("</body></html>");
           readString = "";
           client.stop();
