@@ -28,6 +28,10 @@
             android:name=".Gestione"
             android:label="Gestione" >
         </activity>
+         <activity
+            android:name=".Scelta"
+            android:label="Scelta" >
+        </activity>
     </application>
 
 </manifest>
