@@ -1,4 +1,4 @@
-package com.unisannio.casadomotica;
+package com.unisannio.casadomotica.controller;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;

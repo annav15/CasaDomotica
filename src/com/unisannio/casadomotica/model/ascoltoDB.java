@@ -1,4 +1,4 @@
-package com.unisannio.casadomotica.java;
+package com.unisannio.casadomotica.model;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;

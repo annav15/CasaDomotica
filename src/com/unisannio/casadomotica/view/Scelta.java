@@ -1,7 +1,9 @@
-package com.unisannio.casadomotica;
+package com.unisannio.casadomotica.view;
+
+import com.unisannio.casadomotica.R;
+import com.unisannio.casadomotica.controller.Led;
 
 import android.support.v7.app.ActionBarActivity;
-
 import android.view.View.OnClickListener;
 
 

@@ -1,4 +1,4 @@
-package com.unisannio.casadomotica;
+package com.unisannio.casadomotica.view;
 
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -15,6 +15,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 
+
+
+import com.unisannio.casadomotica.R;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

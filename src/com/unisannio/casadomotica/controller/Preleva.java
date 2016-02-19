@@ -1,5 +1,4 @@
-package com.unisannio.casadomotica.java;
-
+package com.unisannio.casadomotica.controller;
 
 import java.io.IOException;
 
