@@ -103,8 +103,6 @@ void loop() {
 
   /// CONTROLLO AUTOMATICO LUMINOSITA INTERNA ///
 
-
-
   if ((luminositaint < 250) && (readString.indexOf("automatico") > 0))
 
   {
@@ -247,6 +245,25 @@ void loop() {
             digitalWrite(luce1, LOW);
             digitalWrite(luce2, LOW);
             digitalWrite(luce3, LOW);
+            
+            
+      //// COMANDI ESCI AUTOMATICO
+
+
+          }
+
+          if (readString.indexOf("esciautomatico") > 0 ) {
+            LEDON1 = false;
+            LEDON2 = false;
+            LEDON3 = false;
+            LEDEST = false;
+
+            digitalWrite(luce1, LOW);
+            digitalWrite(luce2, LOW);
+            digitalWrite(luce3, LOW);
+            digitalWrite(luceest, LOW);
+            digitalWrite(caldaia, LOW);
+            digitalWrite(condizionatore, LOW);
 
 
 
