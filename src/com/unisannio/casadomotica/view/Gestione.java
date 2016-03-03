@@ -41,7 +41,7 @@ public class Gestione extends ActionBarActivity implements OnClickListener {
 		 Button accendiEST = (Button) findViewById(R.id.accendiEST);
 		 Button spegniEST = (Button) findViewById(R.id.spegniEST);
 		 Button accendiTuttoInt = (Button) findViewById(R.id.accendiTuttoInt);
-		 Button spegniTuttoInt= (Button) findViewById(R.id.spegniTuttoint);
+		 Button spegniTuttoInt= (Button) findViewById(R.id.spegniaTuttoInt);
 		accendiS1.setOnClickListener(this);
 		spegnis1.setOnClickListener(this);
 		accendis2.setOnClickListener(this);
@@ -100,7 +100,7 @@ public class Gestione extends ActionBarActivity implements OnClickListener {
 		Led.accendiLed(6,1);
 		Toast.makeText(getApplicationContext(), "led interni tutti accesi",Toast.LENGTH_LONG).show();
 		break;
-	case R.id.spegniTuttoint:		
+	case R.id.spegniaTuttoInt:		
 		Led.accendiLed(6,0);
 		Toast.makeText(getApplicationContext(), "led interni tutti spenti",Toast.LENGTH_LONG).show();
 		break;
