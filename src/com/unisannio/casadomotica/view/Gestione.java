@@ -40,6 +40,8 @@ public class Gestione extends ActionBarActivity implements OnClickListener {
 		 Button spegnis3 = (Button) findViewById(R.id.spegnis3);
 		 Button accendiEST = (Button) findViewById(R.id.accendiEST);
 		 Button spegniEST = (Button) findViewById(R.id.spegniEST);
+		 Button accendiTuttoInt = (Button) findViewById(R.id.accendiTuttoInt);
+		 Button spegniTuttoInt= (Button) findViewById(R.id.spegniTuttoint);
 		accendiS1.setOnClickListener(this);
 		spegnis1.setOnClickListener(this);
 		accendis2.setOnClickListener(this);
@@ -48,6 +50,8 @@ public class Gestione extends ActionBarActivity implements OnClickListener {
 		spegnis3.setOnClickListener(this);
 		accendiEST.setOnClickListener(this);
 		spegniEST.setOnClickListener(this);
+		accendiTuttoInt.setOnClickListener(this);
+		spegniTuttoInt.setOnClickListener(this);
 		TextView valTemp1=(TextView)findViewById(R.id.tempINT1_value);
 		Preleva pr=new Preleva();
 		 String tempinterna=pr.getTempInterna();
@@ -91,6 +95,14 @@ public class Gestione extends ActionBarActivity implements OnClickListener {
 	case R.id.spegniEST:		
 		Led.accendiLed(4,0);
 		Toast.makeText(getApplicationContext(), "led esterno spento",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.accendiTuttoInt:		
+		Led.accendiLed(6,1);
+		Toast.makeText(getApplicationContext(), "led interni tutti accesi",Toast.LENGTH_LONG).show();
+		break;
+	case R.id.spegniTuttoint:		
+		Led.accendiLed(6,0);
+		Toast.makeText(getApplicationContext(), "led interni tutti spenti",Toast.LENGTH_LONG).show();
 		break;
 	}
 	}

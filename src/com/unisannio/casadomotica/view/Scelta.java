@@ -18,8 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 @SuppressLint("NewApi")
@@ -32,22 +34,43 @@ public class Scelta extends ActionBarActivity implements OnClickListener {
 			     	StrictMode.setThreadPolicy(policy);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scelta);
-		Button gestioneA = (Button) findViewById(R.id.gestioneA);
+		
 		 Button gestioneM = (Button) findViewById(R.id.gestioneM);
 
-		 gestioneA.setOnClickListener(this);
+		
 		 gestioneM.setOnClickListener(this);
+		 ToggleButton toggleButton1 = (ToggleButton) findViewById(R.id.Gestion);
+		  toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {	
+				   	    	
+				    	
+				    	
+				    	if (isChecked) {
+				            // The toggle is enabled
+				        	
+				    		Led.accendiLed(5,1);
+				    		Toast toast = Toast.makeText(getApplicationContext(),"Gestione Automatica avviata",3);
+				    		toast.show();
+				        	    
+				        } else {
+				            // The toggle is disabled
+				        	Led.accendiLed(5,0);
+				    		Toast toast = Toast.makeText(getApplicationContext(),"Gestione Automatica spenta",3);
+				    		toast.show();
+
+
+				        }
+				   
+				    }
+				});
 		
 	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
-	case R.id.gestioneA:	
-		Led.accendiLed(5,1);
-		Toast toast = Toast.makeText(getApplicationContext(),"Gestione Automatica avviata",3);
-		toast.show();
-		break;
+	
 	case R.id.gestioneM:		
 		Intent gestioneM = new Intent(this,Gestione.class);  
 		startActivity(gestioneM);

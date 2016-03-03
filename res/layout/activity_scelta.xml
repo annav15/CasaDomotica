@@ -9,22 +9,41 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.80" >
 
-        <Button
-            android:id="@+id/gestioneA"
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="76dp"
-            android:text="Gestione Automatica" />
+            android:layout_alignBottom="@+id/Gestion"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignLeft="@+id/textView1"
+            android:text="Gestione Automatizzata:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ToggleButton
+            android:id="@+id/Gestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/gestioneM"
+            android:text="ToggleButton" />
 
         <Button
             android:id="@+id/gestioneM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gestioneA"
+            android:layout_above="@+id/textView1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="51dp"
+            android:layout_marginBottom="20dp"
             android:text="Gestione Manuale" />
 
     </RelativeLayout>

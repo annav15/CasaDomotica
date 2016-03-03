@@ -69,7 +69,20 @@ public class Led {
 							
 				}
 				else{
-					commandArduino("http://arduino201.homepc.it/?ledestOFF");
+					commandArduino("http://arduino201.homepc.it/?esciautomatico");
+				
+					
+				}
+			
+		}
+			if(stanza==6){
+				if (stato==1){
+					
+					commandArduino("http://arduino201.homepc.it/?accendituttointerno");
+							
+				}
+				else{
+					commandArduino("http://arduino201.homepc.it/?spegnituttointerno");
 				
 					
 				}
